@@ -1,0 +1,15 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure                     {:mvn/version "1.11.3"}
+        org.clojure/clojurescript {:mvn/version "1.11.121"}
+        com.hyperfiddle/electric {:mvn/version "v2-alpha-540-ga4699532"}}
+ :aliases
+ {:dev   {:extra-deps  {hashp/hashp {:mvn/version "0.2.2"}}}
+  :test
+  {:extra-paths ["test"]
+   :extra-deps {org.clojure/test.check {:mvn/version "1.1.1"}
+                io.github.cognitect-labs/test-runner
+                {:git/tag "v0.5.1" :git/sha "dfb30dd"}}}
+  :build {:deps {io.github.clojure/tools.build
+                 {:git/tag "v0.9.2" :git/sha "fe6b140"}
+                 slipset/deps-deploy {:mvn/version "0.2.0"}}
+          :ns-default build}}}

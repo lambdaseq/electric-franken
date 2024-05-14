@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="BuildSystem">
+    <option name="buildSystemId" value="CLOJURE_DEPS" />
+    <option name="displayName" value="examples" />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/resources" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src-dev" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Deps: com.cognitect/transit-java:1.0.371" level="project" />
+    <orderEntry type="library" name="Deps: javax.inject:1" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/data.json:2.4.0" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/clojure:1.12.0-alpha5" level="project" />
+    <orderEntry type="library" name="Deps: thheller/shadow-cljsjs:0.0.22" level="project" />
+    <orderEntry type="library" name="Deps: javax.activation/javax.activation-api:1.2.0" level="project" />
+    <orderEntry type="library" name="Deps: commons-codec:1.15" level="project" />
+    <orderEntry type="library" name="Deps: com.cognitect.aws/api:0.8.612" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.analyzer:1.1.1" level="project" />
+    <orderEntry type="library" name="Deps: com.bhauman/cljs-test-display:0.1.1" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-xml:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-servlet:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.codehaus.plexus/plexus-component-annotations:2.1.0" level="project" />
+    <orderEntry type="library" name="Deps: ring/ring-devel:1.11.0" level="project" />
+    <orderEntry type="library" name="Deps: com.cognitect.aws/endpoints:1.1.12.321" level="project" />
+    <orderEntry type="library" name="Deps: com.google.errorprone/error_prone_annotations:2.15.0" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.commons/commons-lang3:3.12.0" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.logging:1.2.4" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/core.specs.alpha:0.2.62" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty.websocket/websocket-jetty-api:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty.websocket/websocket-jetty-common:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: javax.annotation/javax.annotation-api:1.3.2" level="project" />
+    <orderEntry type="library" name="Deps: com.google.auto.value/auto-value-annotations:1.6" level="project" />
+    <orderEntry type="library" name="Deps: io.undertow/undertow-core:2.3.10.Final" level="project" />
+    <orderEntry type="library" name="Deps: com.hyperfiddle/electric:v2-alpha-540-ga4699532" level="project" />
+    <orderEntry type="library" name="Deps: expound:0.9.0" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/spec.alpha:0.3.218" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.cli:1.0.214" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty.toolchain/jetty-jakarta-servlet-api:5.0.2" level="project" />
+    <orderEntry type="library" name="Deps: mvxcvi/puget:1.3.2" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-http:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-util:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.slf4j/jcl-over-slf4j:1.7.36" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.analyzer.jvm:1.2.3" level="project" />
+    <orderEntry type="library" name="Deps: org.wildfly.common/wildfly-common:1.5.4.Final" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.ant/ant-launcher:1.10.11" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty.websocket/websocket-core-common:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-transport-http:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: com.googlecode.json-simple/json-simple:1.1.1" level="project" />
+    <orderEntry type="library" name="Deps: org.jspecify/jspecify:0.2.0" level="project" />
+    <orderEntry type="library" name="Deps: com.cognitect/transit-cljs:0.8.280" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/google-closure-library:0.0-20230227-c7c0a541" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-model-builder:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: thheller/shadow-cljs:2.26.2" level="project" />
+    <orderEntry type="library" name="Deps: cloroutine:11" level="project" />
+    <orderEntry type="library" name="Deps: ch.qos.logback/logback-core:1.4.14" level="project" />
+    <orderEntry type="library" name="Deps: rewrite-clj:1.1.45" level="project" />
+    <orderEntry type="library" name="Deps: org.codehaus.plexus/plexus-cipher:2.0" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/clojurescript:1.11.121" level="project" />
+    <orderEntry type="library" name="Deps: org.codehaus.plexus/plexus-utils:3.4.1" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-transport-file:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.sisu/org.eclipse.sisu.plexus:0.3.5" level="project" />
+    <orderEntry type="library" name="Deps: ring/ring-jetty-adapter:1.11.0" level="project" />
+    <orderEntry type="library" name="Deps: commons-io:2.15.0" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-settings-builder:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: com.google.guava/listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty.websocket/websocket-core-server:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.namespace:1.4.4" level="project" />
+    <orderEntry type="library" name="Deps: fipp:0.6.26" level="project" />
+    <orderEntry type="library" name="Deps: org.jboss.logging/jboss-logging:3.4.3.Final" level="project" />
+    <orderEntry type="library" name="Deps: com.fasterxml.jackson.core/jackson-core:2.14.2" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.commons/commons-fileupload2-core:2.0.0-M1" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty.websocket/websocket-servlet:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.ring-clojure/ring-jakarta-servlet:1.11.0" level="project" />
+    <orderEntry type="library" name="Deps: org.ow2.asm/asm:9.2" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty.websocket/websocket-jetty-server:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-settings:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.httpcomponents/httpcore:4.4.15" level="project" />
+    <orderEntry type="library" name="Deps: thheller/shadow-util:0.7.0" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-security:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.codehaus.plexus/plexus-sec-dispatcher:2.0" level="project" />
+    <orderEntry type="library" name="Deps: mvxcvi/arrangement:2.0.0" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-core:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: com.cognitect/transit-js:0.8.874" level="project" />
+    <orderEntry type="library" name="Deps: io.methvin/directory-watcher:0.17.1" level="project" />
+    <orderEntry type="library" name="Deps: zprint:1.2.4" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/google-closure-library-third-party:0.0-20230227-c7c0a541" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-api:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: hiccup:1.0.5" level="project" />
+    <orderEntry type="library" name="Deps: javax.annotation/jsr250-api:1.0" level="project" />
+    <orderEntry type="library" name="Deps: com.cognitect/http-client:1.0.115" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-resolver-provider:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: org.javassist/javassist:3.18.1-GA" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-webapp:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.jboss.xnio/xnio-nio:3.8.8.Final" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.shared/maven-shared-utils:3.3.4" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/java.classpath:1.0.0" level="project" />
+    <orderEntry type="library" name="Deps: ns-tracker:0.4.0" level="project" />
+    <orderEntry type="library" name="Deps: com.google.guava/failureaccess:1.0.1" level="project" />
+    <orderEntry type="library" name="Deps: com.google.guava/guava:31.0.1-jre" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/data.xml:0.2.0-alpha8" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-spi:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: net.cgrand/macrovich:0.2.1" level="project" />
+    <orderEntry type="library" name="Deps: org.msgpack/msgpack:0.6.12" level="project" />
+    <orderEntry type="library" name="Deps: borkdude/edamame:0.0.19" level="project" />
+    <orderEntry type="library" name="Deps: org.jboss.threads/jboss-threads:3.5.0.Final" level="project" />
+    <orderEntry type="library" name="Deps: com.google.j2objc/j2objc-annotations:1.3" level="project" />
+    <orderEntry type="library" name="Deps: com.cognitect/transit-clj:1.0.333" level="project" />
+    <orderEntry type="library" name="Deps: org.codehaus.plexus/plexus-classworlds:2.6.0" level="project" />
+    <orderEntry type="library" name="Deps: args4j:2.33" level="project" />
+    <orderEntry type="library" name="Deps: crypto-random:1.2.1" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.deps:0.18.1354" level="project" />
+    <orderEntry type="library" name="Deps: ring/ring-codec:1.2.0" level="project" />
+    <orderEntry type="library" name="Deps: thheller/shadow-client:1.3.3" level="project" />
+    <orderEntry type="library" name="Deps: org.codehaus.plexus/plexus-interpolation:1.26" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.httpcomponents/httpclient:4.5.13" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/core.rrb-vector:0.1.2" level="project" />
+    <orderEntry type="library" name="Deps: com.hyperfiddle/rcf:20220926-202227" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.ant/ant:1.10.11" level="project" />
+    <orderEntry type="library" name="Deps: org.ring-clojure/ring-websocket-protocols:1.11.0" level="project" />
+    <orderEntry type="library" name="Deps: missionary:b.33" level="project" />
+    <orderEntry type="library" name="Deps: crypto-equality:1.0.1" level="project" />
+    <orderEntry type="library" name="Deps: org.checkerframework/checker-qual:3.12.0" level="project" />
+    <orderEntry type="library" name="Deps: org.wildfly.client/wildfly-client-config:1.0.1.Final" level="project" />
+    <orderEntry type="library" name="Deps: net.java.dev.jna/jna:5.12.1" level="project" />
+    <orderEntry type="library" name="Deps: com.google.inject/guice$no_aop:4.2.2" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-client:9.4.48.v20220622" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-io:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.reader:1.3.7" level="project" />
+    <orderEntry type="library" name="Deps: org.babashka/sci:0.3.4" level="project" />
+    <orderEntry type="library" name="Deps: org.reactivestreams/reactive-streams:1.0.4" level="project" />
+    <orderEntry type="library" name="Deps: hashp:0.2.2" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/tools.gitlibs:2.5.197" level="project" />
+    <orderEntry type="library" name="Deps: nrepl:1.0.0" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-connector-basic:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: com.cognitect.aws/s3:822.2.1145.0" level="project" />
+    <orderEntry type="library" name="Deps: io.github.clojure/tools.build:0.9.6" level="project" />
+    <orderEntry type="library" name="Deps: clj-stacktrace:0.2.8" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-impl:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: org.slf4j/slf4j-api:2.0.7" level="project" />
+    <orderEntry type="library" name="Deps: com.google.re2j/re2j:1.3" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-model:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: org.jboss.xnio/xnio-api:3.8.8.Final" level="project" />
+    <orderEntry type="library" name="Deps: com.google.javascript/closure-compiler-unshaded:v20230802" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.sisu/org.eclipse.sisu.inject:0.3.5" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-util:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven.resolver/maven-resolver-named-locks:1.8.2" level="project" />
+    <orderEntry type="library" name="Deps: com.google.protobuf/protobuf-java:3.21.12" level="project" />
+    <orderEntry type="library" name="Deps: ch.qos.logback/logback-classic:1.4.14" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/core.memoize:1.0.253" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-repository-metadata:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: ring:1.11.0" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/data.priority-map:1.1.0" level="project" />
+    <orderEntry type="library" name="Deps: cider/piggieback:0.5.3" level="project" />
+    <orderEntry type="library" name="Deps: thheller/shadow-undertow:0.3.3" level="project" />
+    <orderEntry type="library" name="Deps: borkdude/sci.impl.reflector:0.0.1" level="project" />
+    <orderEntry type="library" name="Deps: org.eclipse.jetty/jetty-server:11.0.18" level="project" />
+    <orderEntry type="library" name="Deps: aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-builder-support:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: com.google.code.findbugs/jsr305:3.0.2" level="project" />
+    <orderEntry type="library" name="Deps: ring/ring-core:1.11.0" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/core.cache:1.0.225" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-plugin-api:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: org.clojure/core.async:1.6.673" level="project" />
+    <orderEntry type="library" name="Deps: org.apache.maven/maven-artifact:3.8.6" level="project" />
+    <orderEntry type="library" name="Deps: javax.xml.bind/jaxb-api:2.4.0-b180830.0359" level="project" />
+    <orderEntry type="library" name="Deps: com.google.code.gson/gson:2.9.1" level="project" />
+    <orderEntry type="module" module-name="electric-commons" />
+  </component>
+</module>

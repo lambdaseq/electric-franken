@@ -1,0 +1,28 @@
+{:deps    {com.hyperfiddle/electric       {:mvn/version "v2-alpha-540-ga4699532"}
+           ring/ring                      {:mvn/version "1.11.0"} ; comes with Jetty
+           org.clojure/clojure            {:mvn/version "1.12.0-alpha5"}
+           org.clojure/clojurescript      {:mvn/version "1.11.121"}
+           org.clojure/tools.logging      {:mvn/version "1.2.4"}
+           ch.qos.logback/logback-classic {:mvn/version "1.4.14"}
+           conjurernix/electric-franken   {:local/root "../"}}
+ :paths   ["src" "resources"]
+ :aliases {:dev
+           {:extra-paths ["src-dev"]
+            :extra-deps  {hashp/hashp                   {:mvn/version "0.2.2"}
+                          thheller/shadow-cljs          {:mvn/version "2.26.2"}
+                          io.github.clojure/tools.build {:mvn/version "0.9.6"
+                                                         :exclusions  [; Guava version conflict between tools.build and clojurescript.
+                                                                       com.google.guava/guava
+                                                                       org.slf4j/slf4j-nop]}}}
+           :prod
+           {:extra-paths ["src-prod"]}
+           ; use `clj -X:build build-client`, NOT -T! build/app classpath contamination cannot be prevented
+           :build
+           {:extra-paths ["src-build"]
+            :ns-default  build
+            :extra-deps  {thheller/shadow-cljs          {:mvn/version "2.26.2"}
+                          io.github.clojure/tools.build {:mvn/version "0.9.6"
+                                                         :exclusions  [; Guava version conflict between tools.build and clojurescript.
+                                                                       com.google.guava/guava
+                                                                       ; clashes with app logger
+                                                                       org.slf4j/slf4j-nop]}}}}}
