@@ -409,3 +409,163 @@
         (e/for [control filter-controls]
           (FilterControl. control)))
       (body.))))
+
+(defn form-style->class [style]
+  (case style
+    :primary "primary"
+    :danger "danger"))
+
+(e/defn FormInput [{:keys [type value]
+                    :or   {type "text"}}]
+  (e/client
+    (dom/input (dom/props {:class "uk-input"}))))
+
+(e/defn FormSelectOption [{:keys [value]}]
+  (e/client
+    (dom/option (dom/text value))))
+
+(e/defn FormSelect [{:keys [options]}]
+  (e/client
+    (dom/select (dom/props {:class "uk-select"})
+                (e/for [option options]
+                  (FormSelectOption. option)))))
+
+(e/defn FormTextarea [{:keys [rows placeholder value]
+                       :or   {rows        3
+                              placeholder ""}}]
+  (e/client
+    (dom/textarea (dom/props {:class       "uk-textarea"
+                              :value       value
+                              :rows        rows
+                              :placeholder placeholder}))))
+
+(e/defn FormRadioOption [{:keys [label name checked]}]
+  (e/client
+    (dom/label
+      (dom/input (dom/props (cond-> {:class "uk-radio"
+                                     :name  name
+                                     :type  "radio"}
+                              (true? checked) (assoc :checked ""))))
+      (TextOrFragment. label))))
+
+(e/defn FormRadio [{:keys [items body]}]
+  (e/client
+    (dom/div
+      (if (seq items)
+        (e/for [item items]
+          (FormRadioOption. item))
+        (TextOrFragment. body)))))
+
+(e/defn FormCheckboxOption [{:keys [label checked]}]
+  (e/client
+    (dom/label
+      (dom/input (dom/props (cond-> {:class "uk-checkbox"
+                                     :type  "checkbox"}
+                              (true? checked) (assoc :checked ""))))
+      (TextOrFragment. label))))
+
+(e/defn FormCheckbox [{:keys [items body]}]
+  (e/client
+    (dom/div
+      (if (seq items)
+        (e/for [item items]
+          (FormCheckboxOption. item))
+        (TextOrFragment. body)))))
+
+(e/defn FormRange [{:keys [value min max step]
+                    :or   {min  ""
+                           max  ""
+                           step ""}}]
+  (e/client
+    (dom/input (dom/props {:class "uk-range"
+                           :type  "range"
+                           :value value
+                           :min   min
+                           :max   max
+                           :step  step}))))
+
+(e/defn FormToggleSwitch [{:keys [checked style]
+                           :or   {style :primary}}]
+  (e/client
+    (let [style-class (form-style->class style)]
+      (dom/input (dom/props (cond-> {:class (str "uk-toggle-switch " style-class)}
+                              (true? checked) (assoc :checked "")))))))
+
+(e/defn FormLabel [{:keys [for body]}]
+  (e/client
+    (dom/label (dom/props (cond-> {:class "uk-form-label"}
+                            for (assoc :for for)))
+               (TextOrFragment. body))))
+
+(e/defn FormTagDelete []
+  (e/client
+    (dom/span (dom/props {:class    "uk-close"
+                          :uk-close ""}))))
+
+(e/defn FormTag [{:keys [body closeable]}]
+  (e/client
+    (dom/span (dom/props {:class "uk-tag"})
+      (TextOrFragment. body)
+      (when closeable
+        (FormTagDelete.)))))
+
+(e/defn FormTagInput [{:keys [tags]}]
+  (e/client
+    (dom/div (dom/props {:class "uk-tag-input"})
+      (e/for [tag tags]
+        (FormTag. tag)))))
+
+(e/defn FormPinInput [{:keys [length disabled separated]}]
+  (e/client
+    (dom/div (dom/props {:class (cond-> "uk-pin-input"
+                                  (true? disabled) (str " uk-disabled")
+                                  (true? separated) (str " uk-separated"))})
+      (e/for [_ (range length)]
+        (dom/input (dom/props {:type "text" :maxlength "1"}))))))
+
+(e/defn FormHelp [{:keys [body]}]
+  (e/client
+    (dom/div (dom/props {:class "uk-form-help"})
+      (TextOrFragment. body))))
+
+(e/defn FormFieldset [body]
+  (e/client
+    (dom/fieldset (dom/props {:class "uk-fieldset"})
+                  (body.))))
+
+(defn form-layout->class [layout]
+  (when layout
+    (case layout
+      :stacked "uk-form-stacked"
+      :horizontal "uk-form-horizontal")))
+
+(e/defn FormControl [{:keys [body]}]
+  (e/client
+    (dom/div (dom/props {:class "uk-form-controls"})
+      (body.))))
+
+(e/defn FormIcon [{:keys [href icon]}]
+  (e/client
+    (if href
+      (dom/a (dom/props {:class   "uk-form-icon"
+                         :href    href
+                         :uk-icon (str "icon: " (name icon))}))
+      (dom/span (dom/props {:class   "uk-form-icon"
+                            :uk-icon (str "icon: " (name icon))})))))
+
+(e/defn FormCustom [body]
+  (e/client (dom/div (dom/props {:class "uk-form-custom"})
+              (body.))))
+
+(e/defn Form [{:keys [layout body]}]
+  (e/client
+    (let [layout-class (form-layout->class layout)]
+      (dom/form (dom/props {:class (cond-> ""
+                                     layout-class (str layout-class))})
+                (body.)))))
+
+
+
+
+
+
