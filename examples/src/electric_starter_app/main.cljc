@@ -342,7 +342,8 @@
                                              {:selector ".tag-primary"
                                               :body     "Primary"}
                                              {:selector ".tag-secondary"
-                                              :body     "Secondary"}]
+                                              :body     "Secondary"}
+                                             {:body "Clear"}]
                            :body            (e/fn []
                                               (dom/ul (dom/props {:class "js-filter grid grid-cols-2 md:grid-cols-3 gap-3 mt-5"})
                                                 (dom/li (dom/props {:class "tag-transparent"})
@@ -380,5 +381,4 @@
                                                     (dom/text "Item")))
                                                 (dom/li (dom/props {:class "tag-secondary"})
                                                   (dom/div (dom/props {:class "uk-card uk-card-secondary uk-card-body"})
-                                                    (dom/text "Item")))))})))
-          )))))
+                                                    (dom/text "Item")))))}))))))))

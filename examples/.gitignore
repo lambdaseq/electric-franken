@@ -10,6 +10,7 @@
 .shadow-cljs
 node_modules
 /resources/public/electric_starter_app/js
+/resources/public/electric_starter_app/css/output.css
 /resources/electric-manifest.edn
 /target
 .DS_Store
