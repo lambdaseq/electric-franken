@@ -1,10 +1,10 @@
 (ns conjurernix.electric-franken
+  "Traditional component library API with style common in what you find in JS frameworks"
   (:require [hyperfiddle.electric :as e]
             [hyperfiddle.electric-dom2 :as dom]
             [hashp.core]))
 
 ;; Data based API
-; TODO: Add Aria when necessary.
 (defmacro fragment [& body]
   `(e/fn [] ~@body))
 
@@ -495,7 +495,7 @@
   (e/client
     (dom/label (dom/props (cond-> {:class "uk-form-label"}
                             for (assoc :for for)))
-               (TextOrFragment. body))))
+      (TextOrFragment. body))))
 
 (e/defn FormTagDelete []
   (e/client
