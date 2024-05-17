@@ -2,7 +2,7 @@
 <module type="JAVA_MODULE" version="4">
   <component name="BuildSystem">
     <option name="buildSystemId" value="CLOJURE_DEPS" />
-    <option name="displayName" value="electric-commons" />
+    <option name="displayName" value="electric-franken" />
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />

@@ -14,6 +14,9 @@
 (defmacro separated []
   `(dom/props {:class "uk-separated"}))
 
+(defmacro active []
+  `(dom/props {:class "uk-active"}))
+
 (defmacro AccordionTitle [& body]
   `(dom/a (dom/props {:class "uk-accordion-title"
                       :href  ""})
@@ -36,14 +39,16 @@
                        :class        "uk-accordion"})
      ~@body))
 
-; TODO: Check if both collapsible and multiple can be used at the same time
-(defmacro collapsible-accordion [bool]
-  `(let [bool# ~bool]
-     (dom/props {:uk-accordion (str "collapsible: " bool# ";")})))
+(defmacro open-accordion-item []
+  `(dom/props {:class "uk-open"}))
 
-(defmacro multiple-accordion [bool]
-  `(let [bool# ~bool]
-     (dom/props {:uk-accordion (str "multiple: " bool# ";")})))
+(defmacro accordion-opts [opts]
+  `(let [opts# ~opts
+         multiple# (get opts# :multiple)
+         collapsible# (get opts# :collapsible)]
+     (dom/props {:uk-accordion (cond-> ""
+                                 (some? multiple#) (str "multiple: " multiple# ";")
+                                 (some? collapsible#) (str "collapsible: " collapsible# ";"))})))
 
 (defmacro AlertTitle [& body]
   `(dom/div (dom/props {:class "uk-alert-title"})
@@ -84,11 +89,12 @@
 (defmacro badge-danger []
   `(dom/props {:class "uk-badge-danger"}))
 
+(defmacro BreadcrumbItem [& body]
+  `(dom/li ~@body))
+
 (defmacro Breadcrumb [& body]
   `(dom/ul (dom/props {:class "uk-breadcrumb"})
      ~@body))
-
-
 
 (defmacro Button [& body]
   `(dom/button (dom/props {:class "uk-button" :type "button"})
@@ -130,12 +136,15 @@
      ~@body))
 
 (defmacro CardBody [& body]
-  `(dom/div (dom/props {:class "uk-card uk-card-body"})
+  `(dom/div (dom/props {:class "uk-card-body"})
      ~@body))
 
 (defmacro Card [& body]
   `(dom/div (dom/props {:class "uk-card"})
      ~@body))
+
+(defmacro card-body []
+  `(dom/props {:class "uk-card-body"}))
 
 (defmacro card-default []
   `(dom/props {:class "uk-card-default"}))
@@ -166,10 +175,12 @@
   `(dom/span (dom/props {:class "uk-countdown-separator"})
      ~@body))
 
-(defmacro Countdown [date & body]
-  `(let [date# ~date]
-     (dom/div (dom/props {:uk-countdown (str "date: " date#)})
-       ~@body)))
+(defmacro Countdown [& body]
+  `(dom/div (dom/props {:uk-countdown ""})
+     ~@body))
+
+(defmacro countdown-date [date]
+  `(dom/props {:uk-countdown (str "date: " ~date)}))
 
 (defmacro CoverVideo
   "Note: Here `body` is not used for new elements as `video` can't
@@ -200,7 +211,7 @@
 (defmacro SmallDivider
   "Note: need to add a height manually"
   [& body]
-  `(dom/hr (dom/props {:class "uk-divider-vertical"})
+  `(dom/hr (dom/props {:class "uk-divider-small"})
      ~@body))
 
 (defmacro NavDivider [& body]
@@ -210,6 +221,12 @@
 (defmacro NavHeader [& body]
   `(dom/li (dom/props {:class "uk-nav-header"})
      ~@body))
+
+(defmacro NavItem [& body]
+  `(dom/li ~@body))
+
+(defmacro nav-item-active []
+  `(active))
 
 (defmacro DotNav [& body]
   `(dom/ul (dom/props {:class "uk-dotnav"})
@@ -249,7 +266,7 @@
      (dom/props {:uk-drop (str "mode: " mode# ";")})))
 
 (defmacro DropParentIcon [& body]
-  `(dom/span (dom/props {:uk-drop-parent-icon "" :class "ml-2"})
+  `(dom/span (dom/props {:uk-drop-parent-icon ""})
      ~@body))
 
 (defmacro Drop [& body]
@@ -286,7 +303,7 @@
      ~@body))
 
 (defmacro Dropnav [& body]
-  `(dom/nav (dom/props {:uk-drop-nav ""})
+  `(dom/nav (dom/props {:uk-dropnav ""})
      ~@body))
 
 (defmacro Subnav [& body]
@@ -388,4 +405,8 @@
 
 (defmacro FormCustom [& body]
   `(dom/div (dom/props {:class "uk-form-custom"})
+     ~@body))
+
+(defmacro Legend [& body]
+  `(dom/legend (dom/props {:class "uk-legend"})
      ~@body))

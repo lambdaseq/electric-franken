@@ -1,384 +1,418 @@
 (ns electric-starter-app.main
   (:require [hyperfiddle.electric :as e]
             [hyperfiddle.electric-dom2 :as dom]
-            [conjurernix.electric-franken :as ui]
+            [conjurernix.electric-franken.api :as ui]
             [hashp.core]))
 
 ;; Saving this file will automatically recompile and update in your browser
 
+(defmacro ExamplesWrapper [title & body]
+  `(dom/div (dom/props {:class "flex-1"})
+     (dom/props {:class "w-1/2 m-auto"})
+     (dom/h1
+       (dom/props {:class "mb-4"})
+       (dom/text ~title))
+     ~@body))
+
 (e/defn Main [ring-request]
-  (e/server
-    (e/client
-      (binding [dom/node js/document.body]
-        (dom/div (dom/props {:class "flex flex-col gap-8 p-10"})
+  (e/client
+    (binding [dom/node js/document.body]
+      (dom/div (dom/props {:class "flex flex-col gap-8 p-10"})
+        #_(ExamplesWrapper "Accordion Example"
+            (ui/Accordion
+              (ui/AccordionItem
+                (ui/open-accordion-item)
+                (ui/AccordionTitle
+                  (dom/text "Item 1")
+                  (ui/AccordionIcon))
+                (ui/AccordionContent
+                  (dom/text "Lorem Ipsum")))
+              (ui/AccordionItem
+                (ui/AccordionTitle
+                  (dom/text "Item 1")
+                  (ui/AccordionIcon))
+                (ui/AccordionContent
+                  (dom/text "Lorem Ipsum")))))
 
-          ;; Accordion Examples
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Accordion Example"))
-            (ui/Accordion. {:items [{:title   "Item 1"
-                                     :content "Lorem Ipsum"
-                                     :open?   true}
-                                    {:title   "Item 2"
-                                     :content "Lorem Ipsum"}]}))
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Accordion Example with custom content"))
-            (ui/Accordion. {:items [{:title   "Item 1"
-                                     :content (e/fn []
-                                                (dom/div (dom/props {:class "bg-red-300 p-5"})
-                                                  (dom/text "Lorem Ipsum")))
-                                     :open    true}
-                                    {:title   "Item 2"
-                                     :content "Lorem Ipsum"}]}))
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Accordion Example with Multiple open and Collapsible false"))
-            (ui/Accordion. {:multiple    true
-                            :collapsible false
-                            :items       [{:title   "Item 1"
-                                           :content "Lorem Ipsum"
-                                           :open?   true}
-                                          {:title   "Item 2"
-                                           :content "Lorem Ipsum"}]}))
+        #_(ExamplesWrapper "Accordion Example with Multiple open and Collapsible false"
+            (ui/Accordion
+              (ui/accordion-opts {:multiple true :collapsible false})
+              (ui/AccordionItem
+                (ui/open-accordion-item)
+                (ui/AccordionTitle
+                  (dom/text "Item 1")
+                  (ui/AccordionIcon))
+                (ui/AccordionContent
+                  (dom/text "Lorem Ipsum")))
+              (ui/AccordionItem
+                (ui/AccordionTitle
+                  (dom/text "Item 1")
+                  (ui/AccordionIcon))
+                (ui/AccordionContent
+                  (dom/text "Lorem Ipsum")))))
 
-          ;; Alert Examples
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Alert Example"))
-            (ui/Alert. {:body "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                 tempor incididunt ut labore et dolore magna aliqua."}))
+        #_(ExamplesWrapper "Alert Example"
+            (ui/Alert
+              (dom/text "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                       tempor incididunt ut labore et dolore magna aliqua.")))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Alert Example with title, description and close button"))
-            (ui/Alert. {:title       "Notice"
-                        :description "A description for your alert"
-                        :close       true}))
+        #_(ExamplesWrapper "Alert Example with title description and close icon"
+            (ui/Alert
+              (ui/AlertClose)
+              (ui/AlertTitle
+                (dom/text "Notice"))
+              (ui/AlertDescription
+                (dom/text "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                       tempor incididunt ut labore et dolore magna aliqua."))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Alert Example with danger type"))
-            (ui/Alert. {:style :danger
-                        :body  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                 tempor incididunt ut labore et dolore magna aliqua."}))
+        #_(ExamplesWrapper "Alert Example with danger type"
+            (ui/Alert
+              (ui/alert-danger)
+              (ui/AlertClose)
+              (ui/AlertTitle
+                (dom/text "Notice"))
+              (ui/AlertDescription
+                (dom/text "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                       tempor incididunt ut labore et dolore magna aliqua."))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Alert Example with custom body"))
-            (ui/Alert. {:body (ui/fragment
-                                (ui/AlertClose.)
-                                (ui/AlertTitle. "Hello")
-                                (ui/AlertDescription. "World"))}))
+        #_(ExamplesWrapper "Badge Example"
+            (ui/Badge (dom/text "1"))
+            (ui/Badge (dom/text "100")
+              (ui/badge-primary))
+            (ui/Badge (dom/text "100")
+              (ui/badge-secondary))
+            (ui/Badge (dom/text "100")
+              (ui/badge-danger)))
 
-          ;; Badge Examples
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Badge Example"))
-            (ui/Badge. {:body "1"})
-            (ui/Badge. {:style :primary :body "100"})
-            (ui/Badge. {:style :secondary :body "100"})
-            (ui/Badge. {:style :danger :body "100"}))
+        #_(ExamplesWrapper "Breadcrumb Example"
+            (dom/nav
+              (ui/Breadcrumb
+                (ui/BreadcrumbItem
+                  (dom/a
+                    (dom/props {:href "#"})
+                    (dom/text "Home")))
+                (ui/BreadcrumbItem
+                  (dom/a
+                    (dom/props {:href "#"})
+                    (dom/text "Templates")))
+                (ui/BreadcrumbItem
+                  (ui/disabled)
+                  (dom/a
+                    (dom/props {:href "#"})
+                    (dom/text "Disabled")))
+                (ui/BreadcrumbItem
+                  (dom/a
+                    (dom/props {:href ""})
+                    (dom/text "Franken UI"))))))
 
-          ;; Breadcrumb examples
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Breadcrumb Example"))
-            (ui/Breadcrumb. {:items [{:href "#"
-                                      :body "Home"}
-                                     {:href "#"
-                                      :body "Templates"}
-                                     {:disabled true
-                                      :body     "Disabled"}
-                                     {:body "Franken UI"}]}))
+        #_(ExamplesWrapper "Button Examples"
+            (ui/ButtonLink
+              (dom/props {:href "#"})
+              (dom/text "Link"))
+            (ui/Button
+              (dom/text "Button"))
+            (ui/Button
+              (dom/props {:disabled "true"})
+              (dom/text "Disabled"))
+            (ui/Button
+              (ui/button-ghost)
+              (dom/text "ghost"))
+            (ui/Button
+              (ui/button-danger)
+              (dom/text "Danger")))
 
-          ;; Button Examples
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Button Example"))
-            (dom/p (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/ButtonLink. {:href "#"
-                               :body "Link"})
-              (ui/Button. {:body     "Button"
-                           :on-click (e/fn [_e]
-                                       (js/alert "Clicked"))})
-              (ui/Button. {:disabled true
-                           :body     "Disabled"})))
+        #_(ExamplesWrapper "Simple Card Example"
+            (ui/Card
+              (ui/card-body)
+              (ui/CardTitle (dom/text "Greetings"))
+              (dom/text "Lorem Ipsum")))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Button Example with different styles"))
-            (dom/p (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Button. {:style :primary :body "Click me!"})
-              (ui/Button. {:style :secondary :body "Click me!"})
-              (ui/Button. {:style :danger :body "Click me!"})
-              (ui/Button. {:style :text :body "Click me!"})
-              (ui/Button. {:style :link :body "Click me!"})))
+        #_(ExamplesWrapper "Card Example with header, content and footer"
+            (ui/Card
+              (ui/CardHeader
+                (ui/CardTitle (dom/text "This is a title in a header")))
+              (ui/CardBody
+                (dom/text "Lorem ipsum dolor sit amet, consectetur adipisicing elit."))
+              (ui/CardFooter
+                (dom/div (dom/props {:class "flex justify-between"})
+                  (ui/Button
+                    (ui/button-danger)
+                    (dom/text "Cancel"))
+                  (ui/Button
+                    (dom/text "Save"))))))
+
+        ; TODO: Check why separator doesn't render properly (works on fn based api)
+        #_(ExamplesWrapper "Countdown Example"
+            (ui/Countdown
+              (ui/countdown-date "2024-05-20T07:15:50+00:00")
+              (ui/CountdownDays)
+              (ui/CountdownSeparator
+                (dom/text ":"))
+              (ui/CountdownHours)
+              (ui/CountdownSeparator
+                (dom/text ":"))
+              (ui/CountdownMinutes)
+              (ui/CountdownSeparator
+                (dom/text ":"))
+              (ui/CountdownSeconds)))
+
+        #_(ExamplesWrapper "Divider Example"
+            (ui/IconDivider)
+            (ui/SmallDivider
+              (dom/props {:class "h-[2px]"}))
+            (ui/VerticalDivider))
+
+        #_(ExamplesWrapper "Dotnav Example"
+            (ui/DotNav
+              (ui/NavItem
+                (ui/active)
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Item 1")))
+
+              (ui/NavItem
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Item 2")))
+
+              (ui/NavItem
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Item 3")))))
+
+        #_(ExamplesWrapper "Vertical Dotnav Example"
+            (ui/DotNav
+              (ui/dotnav-vertical)
+              (ui/NavItem
+                (ui/active)
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Item 1")))
+
+              (ui/NavItem
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Item 2")))
+
+              (ui/NavItem
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Item 3")))))
+
+        #_(ExamplesWrapper "Drop Example"
+            (ui/Inline
+              (ui/Button (dom/text "Click to drop"))
+              (ui/Drop
+                (ui/drop-mode :click)
+                (ui/Card
+                  (ui/card-body)
+                  (ui/CardTitle (dom/text "Dropped!"))
+                  (dom/text "because you clicked.")))))
 
 
-          ;; Card Examples
+        #_(ExamplesWrapper "Drop Example by hover"
+            (ui/Inline
+              (ui/Button (dom/text "Click to drop"))
+              (ui/Drop
+                (ui/drop-mode :hover)
+                (ui/Card
+                  (ui/card-body)
+                  (ui/CardTitle (dom/text "Dropped!"))
+                  (dom/text "because you hovered.")))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Simple Card Example"))
-            (dom/p (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Card. {:title "Greetings"
-                         :body  "Lorem Ipsum"})))
+        #_(ExamplesWrapper "Dropbar Example"
+            (ui/Inline
+              (ui/Button (dom/text "Click to drop!"))
+              (ui/Dropbar
+                (ui/dropbar-direction :top)
+                (ui/drop-mode :click)
+                (ui/drop-pos :top-right)
+                (ui/Card
+                  (ui/card-body)
+                  (ui/CardTitle (dom/text "Dropped!"))
+                  (dom/text "because you clicked.")))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Card Example with header, content and footer"))
-            (dom/p (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Card. {:header  (e/fn []
-                                    (ui/CardTitle. "This is a title in a header"))
-                         :content "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
-                         :footer  (e/fn []
-                                    (dom/div (dom/props {:class "flex justify-between"})
-                                      (ui/Button. {:style :danger
-                                                   :body  "Cancel"})
-                                      (ui/Button. {:body "Save"})))})))
+        #_(ExamplesWrapper "Stretched Dropbar Example"
+            (ui/Inline
+              (ui/Button (dom/text "Click to drop!"))
+              (ui/Dropbar
+                (ui/dropbar-direction :top)
+                (ui/drop-mode :click)
+                (ui/drop-pos :top-right)
+                (ui/drop-stretch :x)
+                (ui/Card
+                  (ui/card-body)
+                  (ui/CardTitle (dom/text "Dropped!"))
+                  (dom/text "because you clicked.")))))
 
-          ;; CountDown Example
+        #_(ExamplesWrapper "Dropdown Example"
+            (ui/Inline
+              (dom/props {:class "mr-2"})
+              (ui/Button (dom/text "Click to drop!"))
+              (ui/Dropdown
+                (dom/p
+                  (dom/props {:class "p-6"})
+                  (dom/text "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua")))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Countdown Example"))
-            (dom/p (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Countdown. {:date "2024-05-20T07:15:50+00:00"})))
+        #_(ExamplesWrapper "Dropdown Nav Example"
+            (ui/Inline
+              (dom/props {:class "mr-2"})
+              (ui/Button (dom/text "Navigate"))
+              (ui/Dropdown
+                (ui/DropdownNav
+                  (ui/NavItem
+                    (ui/active)
+                    (dom/a (dom/props {:href "#"})
+                      (dom/text "Item 1")))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Custom Countdown example"))
-            (dom/p (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Countdown. {:date "2024-05-20T07:15:50+00:00"
-                              :body (e/fn []
-                                      (ui/CountdownDays.)
-                                      (ui/CountdownSeparator. "*")
-                                      (ui/CountdownHours.)
-                                      (ui/CountdownSeparator. "*")
-                                      (ui/CountdownMinutes.))})))
+                  (ui/NavItem
+                    (dom/a (dom/props {:href "#"})
+                      (dom/text "Item 2")))
 
-          ;; Cover Example TODO
+                  (ui/NavItem
+                    (dom/a (dom/props {:href "#"})
+                      (dom/text "Item 3")))))))
 
-          ;; Divider
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Simple Divider example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (dom/div (dom/props {:class "w-full"})
-                (ui/Divider. {:type :icon}))
-              (dom/div (dom/props {:class "w-full"})
-                (ui/Divider. {:type :small}))
-              (dom/div (dom/props {:class "w-full"})
-                (ui/Divider. {:type :vertical}))))
+        (ExamplesWrapper "Dropnav Example"
+          (ui/Dropnav
+            (ui/Subnav
+              (ui/NavItem
+                (ui/active)
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Active")))
 
-          ;; Dotnav
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Simple Dotnav example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Dotnav. {:items [{:active true
-                                    :body   "Item 1"}
-                                   {:body "Item 2"}
-                                   {:body "Item 3"}]})))
+              (ui/NavItem
+                (dom/a (dom/props {:href ""})
+                  (dom/text "Parent")
+                  (ui/DropParentIcon
+                    (dom/props {:class "ml-2"})))
+                (ui/Dropdown
+                  (ui/DropdownNav
+                    (ui/NavItem
+                      (ui/active)
+                      (dom/a (dom/props {:href "#"})
+                        (dom/text "Item 1")))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Vertical Dotnav example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Dotnav. {:vertical true
-                           :items    [{:active true
-                                       :body   "Item 1"}
-                                      {:body "Item 2"}
-                                      {:body "Item 3"}]})))
+                    (ui/NavItem
+                      (dom/a (dom/props {:href "#"})
+                        (dom/text "Item 2")))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Drop example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Button. {:body "Click to drop!"})
-              (ui/Drop. {:mode :click
-                         :body (e/fn []
-                                 (ui/Card. {:title "Dropped!"
-                                            :body  "because you clicked"}))})))
+                    (ui/NavItem
+                      (dom/a (dom/props {:href "#"})
+                        (dom/text "Item 3"))))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Drop example by hover"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Button. {:body
-                           (e/fn [] (dom/text "Hover with icon ") (ui/DropParentIcon.))})
-              (ui/Drop. {:mode :hover
-                         :body (e/fn []
-                                 (ui/Card. {:title "Dropped!"
-                                            :body  "because you hovered"}))})))
+              (ui/NavItem
+                (dom/a (dom/props {:href ""})
+                  (dom/text "Parent")
+                  (ui/DropParentIcon
+                    (dom/props {:class "ml-2"})))
+                (ui/Dropdown
+                  (ui/DropdownNav
+                    (ui/NavItem
+                      (ui/active)
+                      (dom/a (dom/props {:href "#"})
+                        (dom/text "Item 1")))
 
-          ;; Dropbar
+                    (ui/NavItem
+                      (dom/a (dom/props {:href "#"})
+                        (dom/text "Item 2")))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Dropbar example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Inline.
-                (e/fn []
-                  (ui/Button. {:body "Click to drop!"})
-                  (ui/Dropbar. {:direction :bottom
-                                :mode      :click
-                                :pos       :top-right
-                                :body      (e/fn []
-                                             (ui/Card. {:title "Dropbar"
-                                                        :body  "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"}))})))))
+                    (ui/NavItem
+                      (dom/a (dom/props {:href "#"})
+                        (dom/text "Item 3"))))))
 
-          ;; Dropdown Example
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Dropdown Example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Inline.
-                (e/fn []
-                  (dom/props {:class "mr-2"})
-                  (ui/Button. {:body "Click to drop!"})
-                  (ui/Dropdown. {:body (e/fn []
-                                         (dom/props {:class "p-6"})
-                                         (dom/text "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"))})))))
+              (ui/NavItem
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Item"))))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Dropdown Nav Example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Inline.
-                (e/fn []
-                  (dom/props {:class "mr-2"})
-                  (ui/Button. {:body "Click to drop!"})
-                  (ui/Dropdown. {:nav-items [{:active true :body "Active"}
-                                             {:body "Item"}
-                                             {:header true :body "Header"}
-                                             {:body "Item"}
-                                             {:body "Item"}
-                                             {:divider true}
-                                             {:body "Item"}]})))))
+        (ExamplesWrapper "Filters Example"
+          (ui/Filter ".js-filter"
+            (ui/Subnav
+              (ui/FilterControl ".tag-transparent"
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Transparent")))
+              (ui/FilterControl ".tag-primary"
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Primary")))
+              (ui/FilterControl ".tag-secondary"
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "Secondary")))
+              (ui/FilterControl ""
+                (dom/a (dom/props {:href "#"})
+                  (dom/text "None"))))
 
-          ; Dropnav Example
+            (dom/ul (dom/props {:class "js-filter grid grid-cols-2 md:grid-cols-3 gap-3 mt-5"})
+              (dom/li (dom/props {:class "tag-primary"})
+                (ui/Card
+                  (ui/card-primary)
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-transparent"})
+                (ui/Card
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-secondary"})
+                (ui/Card
+                  (ui/card-secondary)
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-primary"})
+                (ui/Card
+                  (ui/card-primary)
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-secondary"})
+                (ui/Card
+                  (ui/card-secondary)
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-transparent"})
+                (ui/Card
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-transparent"})
+                (ui/Card
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-secondary"})
+                (ui/Card
+                  (ui/card-secondary)
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-primary"})
+                (ui/Card
+                  (ui/card-primary)
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-secondary"})
+                (ui/Card
+                  (ui/card-secondary)
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-transparent"})
+                (ui/Card
+                  (ui/card-body)
+                  (dom/text "Item")))
+              (dom/li (dom/props {:class "tag-primary"})
+                (ui/Card
+                  (ui/card-primary)
+                  (ui/card-body)
+                  (dom/text "Item"))))))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Dropdown Nav Example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Dropnav. {:subnavs [{:active true :body "Active"}
-                                      {:label     "Parent"
-                                       :nav-items [{:active true
-                                                    :body   "Active"}
-                                                   {:body "Item"}
-                                                   {:body "Item"}]}
-                                      {:label     "Parent"
-                                       :nav-items [{:active true
-                                                    :body   "Active"}
-                                                   {:body "Item"}
-                                                   {:body "Item"}]}
-                                      {:body "Item"}]})))
+        (ExamplesWrapper "Form Example"
+          (dom/form
+            (ui/Fieldset
+              (dom/props {:class "flex flex-col gap-3"})
+              (ui/Legend (dom/text "Legend"))
+              (ui/Input (dom/props {:placeholder "Input"}))
 
-          ;; Filter Example
+              (ui/Select
+                (ui/Option (dom/text "Option 1"))
+                (ui/Option (dom/text "Option 2")))
 
-          (dom/div (dom/props {:class "flex-1"})
-            (dom/props {:class "w-1/2 m-auto"})
-            (dom/h1
-              (dom/props {:class "mb-4"})
-              (dom/text "Dropdown Nav Example"))
-            (dom/div (dom/props {:class "flex flex-wrap gap-3"})
-              (ui/Filter. {:selector        ".js-filter"
-                           :filter-controls [{:selector ".tag-transparent"
-                                              :body     "Transparent"}
-                                             {:selector ".tag-primary"
-                                              :body     "Primary"}
-                                             {:selector ".tag-secondary"
-                                              :body     "Secondary"}
-                                             {:body "Clear"}]
-                           :body            (e/fn []
-                                              (dom/ul (dom/props {:class "js-filter grid grid-cols-2 md:grid-cols-3 gap-3 mt-5"})
-                                                (dom/li (dom/props {:class "tag-transparent"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-default uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-primary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-primary uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-transparent"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-default uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-transparent"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-default uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-secondary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-secondary uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-secondary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-secondary uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-primary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-primary uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-secondary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-secondary uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-primary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-primary uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-transparent"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-default uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-primary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-primary uk-card-body"})
-                                                    (dom/text "Item")))
-                                                (dom/li (dom/props {:class "tag-secondary"})
-                                                  (dom/div (dom/props {:class "uk-card uk-card-secondary uk-card-body"})
-                                                    (dom/text "Item")))))}))))))))
+              (dom/div (dom/props {:class "flex gap-3"})
+                (ui/Label
+                  (ui/Radio)
+                  (dom/text "A"))
+                (ui/Label
+                  (ui/Radio)
+                  (dom/text "B")))
+
+              )))
+
+        ))))

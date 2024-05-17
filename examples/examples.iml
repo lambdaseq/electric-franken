@@ -11,6 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src-dev" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src-prod" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -171,6 +172,6 @@
     <orderEntry type="library" name="Deps: org.apache.maven/maven-artifact:3.8.6" level="project" />
     <orderEntry type="library" name="Deps: javax.xml.bind/jaxb-api:2.4.0-b180830.0359" level="project" />
     <orderEntry type="library" name="Deps: com.google.code.gson/gson:2.9.1" level="project" />
-    <orderEntry type="module" module-name="electric-commons" />
+    <orderEntry type="module" module-name="electric-franken" />
   </component>
 </module>
