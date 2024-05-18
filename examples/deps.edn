@@ -13,7 +13,9 @@
                           io.github.clojure/tools.build {:mvn/version "0.9.6"
                                                          :exclusions  [; Guava version conflict between tools.build and clojurescript.
                                                                        com.google.guava/guava
-                                                                       org.slf4j/slf4j-nop]}}}
+                                                                       org.slf4j/slf4j-nop]}}
+            ; Increase java stack size for comptime macro expanding
+            :jvm-opts    ["-Xss4m"]}
            :prod
            {:extra-paths ["src-prod"]}
            ; use `clj -X:build build-client`, NOT -T! build/app classpath contamination cannot be prevented

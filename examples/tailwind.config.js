@@ -25,5 +25,5 @@ module.exports = {
     plugins: [
         require('@tailwindcss/forms'),
     ],
-    presets: [presetQuick({theme: "zinc"})]
+    presets: [presetQuick()]
 }
