@@ -5,6 +5,7 @@ modifiers, and other utilities and helpers.
 
 ## Installation
 
+### Franken/Tailwind
 First you have to setup your project to use Tailwind and Franken. Directions for installing Franken can be found
 [here](https://www.franken-ui.dev/docs/installation). For an example on how to do it in a Clojure codebase
 with `shadow-cljs`
@@ -67,6 +68,9 @@ module.exports = {
     presets: [presetQuick()]
 }
 ```
+### electric-franken clojars
+
+You can find the library on [clojars](https://clojars.org/io.github.conjurernix/electric-franken).
 
 ### Stack Overflow
 
