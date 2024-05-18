@@ -21,7 +21,7 @@
         (ExamplesWrapper "Accordion Example"
           (ui/Accordion
             (ui/AccordionItem
-              (ui/open-accordion-item)
+              (ui/open)
               (ui/AccordionTitle
                 (dom/text "Item 1")
                 (ui/AccordionIcon))
@@ -36,9 +36,9 @@
 
         (ExamplesWrapper "Accordion Example with Multiple open and Collapsible false"
           (ui/Accordion
-            (ui/accordion-opts {:multiple true :collapsible false})
+            (ui/accordion {:multiple true :collapsible false})
             (ui/AccordionItem
-              (ui/open-accordion-item)
+              (ui/open)
               (ui/AccordionTitle
                 (dom/text "Item 1")
                 (ui/AccordionIcon))
@@ -197,7 +197,7 @@
           (ui/Inline
             (ui/Button (dom/text "Click to drop"))
             (ui/Drop
-              (ui/drop-mode :click)
+              (ui/drop {:mode "click"})
               (ui/Card
                 (ui/card-body)
                 (ui/CardTitle (dom/text "Dropped!"))
@@ -208,7 +208,7 @@
           (ui/Inline
             (ui/Button (dom/text "Click to drop"))
             (ui/Drop
-              (ui/drop-mode :hover)
+              (ui/drop {:mode "hover"})
               (ui/Card
                 (ui/card-body)
                 (ui/CardTitle (dom/text "Dropped!"))
@@ -218,9 +218,9 @@
           (ui/Inline
             (ui/Button (dom/text "Click to drop!"))
             (ui/Dropbar
-              (ui/dropbar-direction :top)
-              (ui/drop-mode :click)
-              (ui/drop-pos :top-right)
+              (ui/drop {:direction "top"
+                        :mode "click"
+                        :pos "top-right"})
               (ui/Card
                 (ui/card-body)
                 (ui/CardTitle (dom/text "Dropped!"))
@@ -230,10 +230,11 @@
           (ui/Inline
             (ui/Button (dom/text "Click to drop!"))
             (ui/Dropbar
-              (ui/dropbar-direction :top)
-              (ui/drop-mode :click)
-              (ui/drop-pos :top-right)
-              (ui/drop-stretch :x)
+              (ui/dropbar-top)
+              (ui/drop {:mode "click"
+                        :pos "top-right"
+                        :stretch "x"})
+
               (ui/Card
                 (ui/card-body)
                 (ui/CardTitle (dom/text "Dropped!"))
@@ -475,8 +476,6 @@
                   (dom/input (dom/props {:placeholder "Upload a file"
                                          :type        "file"}))
                   (ui/Button (dom/text "Upload"))))
-
-
 
               )))
 

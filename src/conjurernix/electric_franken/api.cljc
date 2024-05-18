@@ -1,8 +1,6 @@
 (ns conjurernix.electric-franken.api
   "Macro based API inspired from electric ui4/ui5"
-  (:require [hashp.core]
-            [hyperfiddle.electric :as e]
-            [hyperfiddle.electric-dom2 :as dom]))
+  (:require [hyperfiddle.electric-dom2 :as dom]))
 
 ;; Macro-based API
 
@@ -11,6 +9,10 @@
 
 (defmacro separated []
   `(dom/props {:class "uk-separated"}))
+
+(defmacro open []
+  `(dom/props {:class "uk-open"}))
+
 
 (defmacro active []
   `(dom/props {:class "uk-active"}))
@@ -40,9 +42,7 @@
                        :class        "uk-accordion"})
      ~@body))
 
-(defmacro open-accordion-item []
-  `(dom/props {:class "uk-open"}))
-
+; TODO: This pattern is very common, should be abstracted into a macro.
 (defmacro accordion [opts]
   `(let [opts# ~opts
          multiple# (get opts# :multiple)
@@ -241,36 +241,16 @@
 (defmacro dotnav-vertical []
   `(dom/props {:class "uk-dotnav-vertical"}))
 
-; TODO: pos is used in different places, refactor switch case
-(defmacro drop-pos [pos]
-  `(let [pos# (case ~pos
-                :top-left "top-left"
-                :top-center "top-center"
-                :top-right "top-right"
-                :bottom-left "bottom-left"
-                :bottom-center "bottom-center"
-                :bottom-right "bottom-right"
-                :left-top "left-top"
-                :left-center "left-center"
-                :left-bottom "left-bottom"
-                :right-top "right-top"
-                :right-center "right-center"
-                :right-bottom "right-bottom")]
-     (dom/props {:uk-drop (str "pos: " pos# ";")})))
 
-(defmacro drop-stretch [stretch]
-  `(let [stretch# (case ~stretch
-                    true "true"
-                    :x "x"
-                    :y "y")]
-     (dom/props {:uk-drop (str "stretch: " stretch# ";")})))
-
-(defmacro drop-mode [mode]
-  `(let [mode# (case ~mode
-                 :hover-click "click,hover"
-                 :click "click"
-                 :hover "hover")]
-     (dom/props {:uk-drop (str "mode: " mode# ";")})))
+(defmacro drop [opts]
+  `(let [opts# ~opts
+         pos# (get opts# :pos)
+         stretch# (get opts# :stretch)
+         mode# (get opts# :mode)]
+     (dom/props {:uk-drop (cond-> ""
+                            (some? pos#) (str "pos: " pos# ";")
+                            (some? mode#) (str "mode: " mode# ";")
+                            (some? stretch#) (str "stretch: " stretch# ";"))})))
 
 (defmacro DropParentIcon [& body]
   `(dom/span (dom/props {:uk-drop-parent-icon ""})
@@ -280,17 +260,19 @@
   `(dom/div (dom/props {:uk-drop ""})
      ~@body))
 
+(defmacro dropbar-top []
+  `(dom/props {:class "uk-dropbar-top"}))
+(defmacro dropbar-bottom []
+  `(dom/props {:class "uk-dropbar-bottom"}))
+(defmacro dropbar-left []
+  `(dom/props {:class "uk-dropbar-left"}))
+(defmacro dropbar-right []
+  `(dom/props {:class "uk-dropbar-right"}))
+
+
 (defmacro Dropbar [& body]
   `(dom/div (dom/props {:class "uk-dropbar" :uk-drop ""})
      ~@body))
-
-(defmacro dropbar-direction [direction]
-  `(let [style# (case ~direction
-                  :top "uk-drop-bar-top"
-                  :bottom "uk-drop-bar-bottom"
-                  :left "uk-drop-bar-left"
-                  :right "uk-drop-bar-right")]
-     (dom/props {:class style#})))
 
 (defmacro Nav [& body]
   `(dom/ul (dom/props {:class "uk-nav"})
@@ -421,11 +403,8 @@
 (defmacro form-danger []
   `(dom/props {:class "uk-form-danger"}))
 
-(defmacro form-with [width]
-  `(let [width# (case ~width
-                  ; TODO: Fill in other cases
-                  :medium "uk-form-width-medium")]
-     (dom/props {:class width#})))
+(defmacro form-width-medium []
+  `(dom/props {:class "uk-form-width-medium"}))
 
 (defmacro form-disabled []
   `(dom/props {:disabled true}))
@@ -590,15 +569,7 @@
          mode# (get opts# :mode)
          align# (get opts# :align)
          target# (get opts# :target)
-         dropbar# (get opts# :dropbar)
-         mode# (case mode#
-                 :hover-click "click,hover"
-                 :click "click"
-                 :hover "hover")
-         align# (case align#
-                  :left "left"
-                  :right "right"
-                  :center "center")]
+         dropbar# (get opts# :dropbar)]
      `(dom/props {:uk-navbar (cond-> ""
                                (some? mode#) (str "mode: " mode# ";")
                                (some? align#) (str "align: " align# ";")

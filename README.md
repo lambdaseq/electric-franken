@@ -1,46 +1,147 @@
 # conjurernix/electric-franken
 
-FIXME: my new library.
+Thin macro-based API for using FrankenUI in Clojure Electric. This library includes macro-based wrappers for components,
+modifiers, and other utilities and helpers.
+
+## Installation
+
+First you have to setup your project to use Tailwind and Franken. Directions for installing Franken can be found
+[here](https://www.franken-ui.dev/docs/installation). For an example on how to do it in a Clojure codebase
+with `shadow-cljs`
+checkout the example directory. Your `tailwind.config.js` (if any) should look something like that:
+
+```javascript
+const presetQuick = require("franken-ui/shadcn-ui/preset-quick");
+const defaultTheme = require('tailwindcss/defaultTheme')
+
+module.exports = {
+    // TODO: Replace this with your own compiled javascript files.
+    content: ["./resources/public/electric_starter_app/js/**/*.js"],
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
+    presets: [presetQuick()]
+}
+```
+
+Since Clojurescript will compile to lots of `.js` files it is possible that you'll have a slow build of your css files.
+An alternative approach is to copy the source code, since it's a simple single-namespaced library, into your own
+project,
+and configure `tailwind.config.js` to parse straight clj(s) code, using `@multiplyco/tailwind-clj`.
+This will reduce significantly your tailwind build times.
+
+```javascript
+const presetQuick = require("franken-ui/shadcn-ui/preset-quick");
+const defaultTheme = require('tailwindcss/defaultTheme')
+const {scanClojure} = require('@multiplyco/tailwind-clj');
+
+module.exports = {
+    // in prod look at shadow-cljs output file in dev look at runtime, which will change files that are actually compiled; postcss watch should be a whole lot faster
+    content: {
+        files: [
+            './src/**/*.{clj,cljs,cljc}'
+        ],
+        extract: {
+            clj: (content) => scanClojure(content),
+            cljs: (content) => scanClojure(content),
+            cljc: (content) => scanClojure(content)
+        }
+    },
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
+    presets: [presetQuick()]
+}
+```
+
+### Stack Overflow
+
+Since it's a macro-based API, you might have Stack Overflow errors at compile time, trying to expand all those macros
+into,
+other macros etc. You can solve that by increasing the stack size of the JVM using `-Xss4m`.
+
+For example in your `deps.edn`
+
+```clojure
+:jvm-opts ["-Xss4m"]
+```
 
 ## Usage
 
-FIXME: write usage documentation!
+This provides a very thin and practical API for use in Clojure electric, so anything in
+the [official Franken docs](https://www.franken-ui.dev/docs/introduction) applies.
 
-Invoke a library API function from the command-line:
+A simple example followed by some explanation:
 
-    $ clojure -X conjurernix.electric-franken/foo :a 1 :b '"two"'
-    {:a 1, :b "two"} "Hello, World!"
+```clojure
+(ui/Inline
+  (ui/Button (dom/text "Click to drop!"))
+  (ui/Dropbar
+    (ui/dropbar-top)
+    (ui/drop {:mode    "click"
+              :pos     "top-right"
+              :stretch "x"})
 
-Run the project's tests (they'll fail until you edit them):
+    (ui/Card
+      (ui/card-body)
+      (ui/CardTitle (dom/text "Dropped!"))
+      (dom/text "because you clicked."))))
+```
 
-    $ clojure -T:build test
+Here, the use of capitalised macros like `ui/Inline` and `ui/Button` are the wrappers of the respective Franken
+components. `ui/dropbar-top` is a helper, that adds the class `uk-dropbar-top` to the encapsulating element,
+the `ui/Dropbar`.
+`ui/drop` adds the `uk-drop` attribute with the options set as in the map.
 
-Run the project's CI pipeline and build a JAR (this will fail until you edit the tests to pass):
+### Examples
 
-    $ clojure -T:build ci
+You can take a close look at the [examples](./examples/src/electric_starter_app/main.cljc)(which are WIP), and also run
+them locally:
 
-This will produce an updated `pom.xml` file with synchronized dependencies inside the `META-INF`
-directory inside `target/classes` and the JAR in `target`. You can update the version (and SCM tag)
-information in generated `pom.xml` by updating `build.clj`.
+```shell
+cd examples
+clj -A:dev -X dev/-main
+```
 
-Install it locally (requires the `ci` task be run first):
+and in another shell
 
-    $ clojure -T:build install
+```shell
+npm run postcss:watch
+```
 
-Deploy it to Clojars -- needs `CLOJARS_USERNAME` and `CLOJARS_PASSWORD` environment
-variables (requires the `ci` task be run first):
+You should be able to access them in your browser at `localhost:8080`.
 
-    $ clojure -T:build deploy
+## Contributing
 
-Your library will be deployed to net.clojars.conjurernix/electric-franken on clojars.org by default.
+It's very possible that I might have missed a component/modifier/directive wrapper. If so please feel free to contribute
+by
+adding anything missing. You should first read a little bit the source code in `conjurernix.electric-franken.api` so
+that you
+understand the idioms used and follow them.
+
+I stopped recreating the examples from the Franken docs halfway through, but feel free to add more examples if you want.
+We'd also like to add some more dynamic examples than just putting elements on the DOM at some point.
+
+## TODO
+
+- [ ] Finish examples for all components and modifiers
+- [ ] Improve examples by having the preview of the example and the markup next to it (similar to Franken's docs).
 
 ## License
 
 Copyright © 2024 Nikolas Pafitis
-
-_EPLv1.0 is just the default for projects generated by `deps-new`: you are not_
-_required to open source this project, nor are you required to use EPLv1.0!_
-_Feel free to remove or change the `LICENSE` file and remove or update this_
-_section of the `README.md` file!_
-
 Distributed under the Eclipse Public License version 1.0.
