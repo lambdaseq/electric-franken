@@ -409,9 +409,41 @@
 (defmacro form-disabled []
   `(dom/props {:disabled true}))
 
-
 (defmacro Legend [& body]
   `(dom/legend (dom/props {:class "uk-legend"})
+     ~@body))
+
+(defmacro grid [opts]
+  `(dom/props {:uk-grid ""}))
+
+(defmacro grid-small []
+  `(dom/props {:class "uk-grid-small"}))
+(defmacro grid-medium []
+  `(dom/props {:class "uk-grid-medium"}))
+(defmacro grid-large []
+  `(dom/props {:class "uk-grid-large"}))
+(defmacro grid-collapse []
+  `(dom/props {:class "uk-grid-collapse"}))
+
+(defmacro grid-column-small []
+  `(dom/props {:class "uk-grid-column-small"}))
+(defmacro grid-row-small []
+  `(dom/props {:class "uk-grid-row-small"}))
+(defmacro grid-column-medium []
+  `(dom/props {:class "uk-grid-column-medium"}))
+(defmacro grid-row-medium []
+  `(dom/props {:class "uk-grid-row-medium"}))
+(defmacro grid-column-large []
+  `(dom/props {:class "uk-grid-column-large"}))
+(defmacro grid-row-large []
+  `(dom/props {:class "uk-grid-row-large"}))
+(defmacro grid-column-collapse []
+  `(dom/props {:class "uk-grid-column-collapse"}))
+(defmacro grid-row-collapse []
+  `(dom/props {:class "uk-grid-row-collapse"}))
+
+(defmacro Grid [& body]
+  `(dom/div (grid {})
      ~@body))
 
 (defmacro Icon [icon & body]
@@ -444,7 +476,8 @@
   `(dom/props {:class "uk-iconnav-outline"}))
 
 (defmacro Label [& body]
-  `(dom/span (dom/props {:class "uk-label"})))
+  `(dom/span (dom/props {:class "uk-label"})
+     ~@body))
 
 (defmacro label-primary []
   `(dom/props {:class "uk-label-primary"}))
