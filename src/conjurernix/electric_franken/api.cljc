@@ -1,5 +1,6 @@
 (ns conjurernix.electric-franken.api
   "Macro based API inspired from electric ui4/ui5"
+  (:refer-clojure :exclude [drop])
   (:require [hyperfiddle.electric-dom2 :as dom]))
 
 ;; Macro-based API
